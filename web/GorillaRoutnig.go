@@ -8,41 +8,31 @@ import (
 )
 
 type GorillaRouting struct {
-	windowType string
-	Port       string
-	Handler    http.Handler
+	Port    string
+	Handler http.Handler
 }
 
 func newGorillaRouter() *GorillaRouting {
 	return &GorillaRouting{}
 }
 
-func (o GorillaRouting) Hello(w http.ResponseWriter, r *http.Request) {
+func (g *GorillaRouting) Hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "hello from Gorilla Routing Router, %s!\n", "aa")
 }
 
-func (o *GorillaRouting) setRoutes() {
-	// router := httprouter.New()
-	// router := http.Handl("/", o.Hello)
+func (g *GorillaRouting) setRoutes() {
 	router := mux.NewRouter()
-	// http.HandleFunc("/a", func(w http.ResponseWriter, r *http.Request) {
-	// 	fmt.Fprintf(w, "hello from J Shmidt, %s!\n", "aa")
-	// })
-	router.HandleFunc("/", o.Hello)
-
-	// router.GET("/", j.Hello)
-
-	o.Handler = router
+	router.HandleFunc("/", g.Hello)
+	g.Handler = router
 }
 
-func (o *GorillaRouting) setPortNum(portNum string) {
-	o.Port = portNum
+func (g *GorillaRouting) setPortNum(portNum int) {
+	g.Port = fmt.Sprintf(":%v", portNum)
 }
 
-func (o *GorillaRouting) getRouterConf() Router {
+func (g *GorillaRouting) getRouterConf() Router {
 	return Router{
-		windowType: o.windowType,
-		Port:       o.Port,
-		Handler:    o.Handler,
+		Port:    g.Port,
+		Handler: g.Handler,
 	}
 }

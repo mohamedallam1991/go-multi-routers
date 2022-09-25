@@ -1,37 +1,46 @@
 package web
 
-import "log"
+import (
+	"log"
+)
 
 type IBuilder interface {
 	setRoutes()
-	setPortNum(Theport string)
+	setPortNum(portNum int)
 	getRouterConf() Router
+}
+
+var Routers = newRouterRegistry()
+
+func newRouterRegistry() *routerRegistry {
+	return &routerRegistry{
+		Chi:      "chi",
+		Gorilla:  "gorilla",
+		JShmidt:  "jshmidt",
+		Official: "offiicial",
+	}
+}
+
+type routerRegistry struct {
+	Chi      string
+	Gorilla  string
+	JShmidt  string
+	Official string
 }
 
 func GetBuilder(builderType string) IBuilder {
 
 	switch builderType {
-	case "chi":
+	case newRouterRegistry().Chi:
 		return newChiRouter()
-	case "Jshmidt":
+	case newRouterRegistry().JShmidt:
 		return newJShmidtRouter()
-	case "official":
+	case newRouterRegistry().Official:
 		return newOfficialRouter()
-	case "gorilla":
+	case newRouterRegistry().Gorilla:
 		return newGorillaRouter()
 	default:
 		log.Fatal("router name is incorrect")
 	}
-	// if builderType == "chi" {
-	// 	return newChiRouter()
-	// }
-
-	// if builderType == "Jshmidt" {
-	// 	return newJShmidtRouter()
-	// }
-
-	// if builderType == "Jshmidt" {
-	// 	return soomethinig()
-	// }
 	return nil
 }

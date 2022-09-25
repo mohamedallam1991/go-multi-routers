@@ -6,9 +6,8 @@ import (
 )
 
 type OfficialRouterConfig struct {
-	windowType string
-	Port       string
-	Handler    http.Handler
+	Port    string
+	Handler http.Handler
 }
 
 func newOfficialRouter() *OfficialRouterConfig {
@@ -20,27 +19,20 @@ func (o OfficialRouterConfig) Hello(w http.ResponseWriter, r *http.Request) {
 }
 
 func (o *OfficialRouterConfig) setRoutes() {
-	// router := httprouter.New()
-	// router := http.Handl("/", o.Hello)
 	a := http.NewServeMux()
-	// http.HandleFunc("/a", func(w http.ResponseWriter, r *http.Request) {
-	// 	fmt.Fprintf(w, "hello from J Shmidt, %s!\n", "aa")
-	// })
-	http.HandleFunc("/", o.Hello)
 
-	// router.GET("/", j.Hello)
+	http.HandleFunc("/", o.Hello)
 
 	o.Handler = a
 }
 
-func (o *OfficialRouterConfig) setPortNum(portNum string) {
-	o.Port = portNum
+func (o *OfficialRouterConfig) setPortNum(portNum int) {
+	o.Port = fmt.Sprintf(":%v", portNum)
 }
 
 func (o *OfficialRouterConfig) getRouterConf() Router {
 	return Router{
-		windowType: o.windowType,
-		Port:       o.Port,
-		Handler:    o.Handler,
+		Port:    o.Port,
+		Handler: o.Handler,
 	}
 }

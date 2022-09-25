@@ -28,14 +28,13 @@ func (j *JShmidtConfig) setRoutes() {
 	j.Handler = router
 }
 
-func (j *JShmidtConfig) setPortNum(portNum string) {
-	j.Port = portNum
+func (j *JShmidtConfig) setPortNum(portNum int) {
+	j.Port = fmt.Sprintf(":%v", portNum)
 }
 
 func (j *JShmidtConfig) getRouterConf() Router {
 	return Router{
-		windowType: j.windowType,
-		Port:       j.Port,
-		Handler:    j.Handler,
+		Port:    j.Port,
+		Handler: j.Handler,
 	}
 }

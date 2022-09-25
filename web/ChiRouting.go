@@ -8,46 +8,32 @@ import (
 )
 
 type ChiConofig struct {
-	windowType string
-	Port       string
-	Handler    http.Handler
+	Port    string
+	Handler http.Handler
 }
 
 func newChiRouter() *ChiConofig {
 	return &ChiConofig{}
 }
 
-func (j ChiConofig) Hello(wa http.ResponseWriter, r *http.Request) {
+func (c *ChiConofig) Hello(wa http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(wa, "hello froom cchi, %s!\n", "a")
 }
 
-//	func Hello(wa http.ResponseWriter, r *http.Request) {
-//		fmt.Fprintf(wa, "hello froom cchi, %s!\n", "a")
-//	}
 func (c *ChiConofig) setRoutes() {
 	router := chi.NewRouter()
 	router.Get("/", c.Hello)
-	router.Get("/hi", c.Hello)
 
 	c.Handler = router
 }
 
-// func (b *ChiConofig) ServeHTTP(http.ResponseWriter, *http.Request) {
-// 	b.windowType = "Wooden Window"
-// }
-
-// func (b *ChiConofig) setDoorType() {
-// 	b.doorType = "Wooden Door"
-// }
-
-func (c *ChiConofig) setPortNum(portNum string) {
-	c.Port = portNum
+func (c *ChiConofig) setPortNum(portNum int) {
+	c.Port = fmt.Sprintf(":%v", portNum)
 }
 
 func (c *ChiConofig) getRouterConf() Router {
 	return Router{
-		windowType: c.windowType,
-		Port:       c.Port,
-		Handler:    c.Handler,
+		Port:    c.Port,
+		Handler: c.Handler,
 	}
 }

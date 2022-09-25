@@ -1,21 +1,21 @@
 package web
 
 type Director struct {
-	Builder IBuilder
+	builder IBuilder
 }
 
-func NewRouter(B IBuilder) *Director {
+func NewRouter(b IBuilder) *Director {
 	return &Director{
-		Builder: B,
+		builder: b,
 	}
 }
 
-func (d *Director) setBuilder(B IBuilder) {
-	d.Builder = B
+func (d *Director) setBuilder(b IBuilder) {
+	d.builder = b
 }
 
-func (d *Director) BuildRouter(Theport string) Router {
-	d.Builder.setRoutes()
-	d.Builder.setPortNum(Theport)
-	return d.Builder.getRouterConf()
+func (d *Director) BuildRouter(portNum int) Router {
+	d.builder.setRoutes()
+	d.builder.setPortNum(portNum)
+	return d.builder.getRouterConf()
 }
