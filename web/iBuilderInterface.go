@@ -1,23 +1,37 @@
 package web
 
-// type Handler interface {
-// 	ServeHTTP(http.ResponseWriter, *http.Request)
-// }
+import "log"
 
 type IBuilder interface {
-	// ServeHTTP(http.ResponseWriter, *http.Request)
-	getRoutes()
-	SetNumFloor(Theport string)
-	GetHouse() Router
+	setRoutes()
+	setPortNum(Theport string)
+	getRouterConf() Router
 }
 
 func GetBuilder(builderType string) IBuilder {
-	if builderType == "chi" {
-		return newChiRouter()
-	}
 
-	if builderType == "Jshmidt" {
+	switch builderType {
+	case "chi":
+		return newChiRouter()
+	case "Jshmidt":
 		return newJShmidtRouter()
+	case "official":
+		return newOfficialRouter()
+	case "gorilla":
+		return newGorillaRouter()
+	default:
+		log.Fatal("router name is incorrect")
 	}
+	// if builderType == "chi" {
+	// 	return newChiRouter()
+	// }
+
+	// if builderType == "Jshmidt" {
+	// 	return newJShmidtRouter()
+	// }
+
+	// if builderType == "Jshmidt" {
+	// 	return soomethinig()
+	// }
 	return nil
 }

@@ -21,26 +21,18 @@ func (j JShmidtConfig) Hello(w http.ResponseWriter, r *http.Request, ps httprout
 	fmt.Fprintf(w, "hello from J Shmidt, %s!\n", ps.ByName("name"))
 }
 
-func (j *JShmidtConfig) getRoutes() {
+func (j *JShmidtConfig) setRoutes() {
 	router := httprouter.New()
 	router.GET("/", j.Hello)
 
 	j.Handler = router
 }
 
-// func (b *JShmidtRouter) ServeHTTP(http.ResponseWriter, *http.Request) {
-// 	b.windowType = "Snow Window"
-// }
-
-// func (b *JShmidtRouter) setDoorType() {
-// 	b.doorType = "Snow Door"
-// }
-
-func (j *JShmidtConfig) SetNumFloor(portNum string) {
+func (j *JShmidtConfig) setPortNum(portNum string) {
 	j.Port = portNum
 }
 
-func (j *JShmidtConfig) GetHouse() Router {
+func (j *JShmidtConfig) getRouterConf() Router {
 	return Router{
 		windowType: j.windowType,
 		Port:       j.Port,

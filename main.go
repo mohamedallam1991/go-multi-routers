@@ -35,12 +35,16 @@ func main() {
 	// return server.ListenAndServe()
 
 	// web.getBuilder
+	// r := ""
+	// fmt.Scanln("which router you want to choose: ", &r)
+	// fmt.Println("yuo typed in: ", r)
 
 	chiBuilder := web.GetBuilder("chi")
+	chiBuilder = web.GetBuilder("gorilla")
 	JshmidtBuilder := web.GetBuilder("Jshmidt")
 
 	director := web.NewRouter(chiBuilder)
-	chiRouter := director.BuildHouse(port)
+	chiRouter := director.BuildRouter(port)
 	log.Fatal(http.ListenAndServe(chiRouter.Port, chiRouter.Handler))
 
 	// getRoutes
@@ -57,7 +61,7 @@ func main() {
 	// fmt.Printf("Normal House Num Floor: %d\n", normalHouse.floor)
 
 	director = web.NewRouter(JshmidtBuilder)
-	Jshmidt := director.BuildHouse(port)
+	Jshmidt := director.BuildRouter(port)
 	// Jshmidt.Builder.
 	_ = Jshmidt
 	log.Fatal(http.ListenAndServe(Jshmidt.Port, Jshmidt.Handler))

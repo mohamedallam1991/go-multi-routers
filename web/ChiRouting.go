@@ -24,7 +24,7 @@ func (j ChiConofig) Hello(wa http.ResponseWriter, r *http.Request) {
 //	func Hello(wa http.ResponseWriter, r *http.Request) {
 //		fmt.Fprintf(wa, "hello froom cchi, %s!\n", "a")
 //	}
-func (c *ChiConofig) getRoutes() {
+func (c *ChiConofig) setRoutes() {
 	router := chi.NewRouter()
 	router.Get("/", c.Hello)
 	router.Get("/hi", c.Hello)
@@ -40,11 +40,11 @@ func (c *ChiConofig) getRoutes() {
 // 	b.doorType = "Wooden Door"
 // }
 
-func (c *ChiConofig) SetNumFloor(portNum string) {
+func (c *ChiConofig) setPortNum(portNum string) {
 	c.Port = portNum
 }
 
-func (c *ChiConofig) GetHouse() Router {
+func (c *ChiConofig) getRouterConf() Router {
 	return Router{
 		windowType: c.windowType,
 		Port:       c.Port,
