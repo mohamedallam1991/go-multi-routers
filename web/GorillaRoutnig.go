@@ -17,7 +17,9 @@ func newGorillaRouter() *GorillaRouting {
 }
 
 func (g *GorillaRouting) Hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello from Gorilla Routing Router, %s!\n", "aa")
+	fmt.Fprintf(w, "hello from root of %s Router!\n", "Gorilla")
+
+	// fmt.Fprintf(w, "hello from Gorilla Routing Router, %s!\n", "aa")
 }
 
 func (g *GorillaRouting) setRoutes() {

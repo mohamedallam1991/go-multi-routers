@@ -18,7 +18,9 @@ func newJShmidtRouter() *JShmidtConfig {
 }
 
 func (j JShmidtConfig) Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "hello from J Shmidt, %s!\n", ps.ByName("name"))
+	fmt.Fprintf(w, "hello from root of %s Router!\n", "JulienSchmidt")
+
+	// fmt.Fprintf(w, "hello from J Shmidt, %s!\n", ps.ByName("name"))
 }
 
 func (j *JShmidtConfig) setRoutes() {

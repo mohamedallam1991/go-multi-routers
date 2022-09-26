@@ -14,14 +14,20 @@ func newOfficialRouter() *OfficialRouterConfig {
 	return &OfficialRouterConfig{}
 }
 
-func (o OfficialRouterConfig) Hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello from Official Router, %s!\n", "aa")
+type muxer struct{}
+
+func (s *muxer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	url := r.URL.Path
+	switch url {
+	case "/":
+		fmt.Fprintf(w, "hello from root of %s Router!\n", "Official")
+	default:
+		http.NotFound(w, r)
+	}
 }
 
 func (o *OfficialRouterConfig) setRoutes() {
-	a := http.NewServeMux()
-
-	http.HandleFunc("/", o.Hello)
+	a := &muxer{}
 
 	o.Handler = a
 }

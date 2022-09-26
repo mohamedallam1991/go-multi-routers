@@ -16,8 +16,9 @@ func newChiRouter() *ChiConofig {
 	return &ChiConofig{}
 }
 
-func (c *ChiConofig) Hello(wa http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(wa, "hello froom cchi, %s!\n", "a")
+func (c *ChiConofig) Hello(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "hello from root of %s Router!\n", "Chi")
+	// fmt.Fprintf(wa, "hello froom cchi, %s!\n", "a")
 }
 
 func (c *ChiConofig) setRoutes() {

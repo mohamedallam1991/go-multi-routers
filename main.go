@@ -11,7 +11,7 @@ const port int = 8011
 
 func main() {
 
-	setup := web.NewRouter(web.GetBuilder(web.Routers.JShmidt))
+	setup := web.NewRouter(web.GetBuilder(web.Routers.Gorilla))
 	router := setup.BuildRouter(port)
 	log.Fatal(http.ListenAndServe(router.Port, router.Handler))
 }
